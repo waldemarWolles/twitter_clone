@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  TextareaAutosize,
-} from '@material-ui/core'
+import { Avatar, Button, Divider, Grid, IconButton, TextareaAutosize } from '@material-ui/core'
 import React from 'react'
 import { useHomeStyles } from '../../pages/Home/theme'
 import cn from 'classnames'
@@ -15,6 +8,8 @@ import EqualizerIcon from '@material-ui/icons/Equalizer'
 import TodayOutlinedIcon from '@material-ui/icons/TodayOutlined'
 import SentimentSatisfiedOutlinedIcon from '@material-ui/icons/SentimentSatisfiedOutlined'
 import { CircularProgress } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
+import { fetchAddTweet } from '../../redux-store/ducks/tweets/actionCreators'
 
 interface TweetInputProps {
   styles: ReturnType<typeof useHomeStyles>
@@ -23,10 +18,8 @@ interface TweetInputProps {
 
 const MAX_LENGTH = 280
 
-export const TweetInput: React.FC<TweetInputProps> = ({
-  styles,
-  isModal,
-}: TweetInputProps): React.ReactElement => {
+export const TweetInput: React.FC<TweetInputProps> = ({ styles, isModal }: TweetInputProps): React.ReactElement => {
+  const dispatch = useDispatch()
   const [text, setText] = React.useState<string>('')
   const textLimitPercent = (text.length / MAX_LENGTH) * 100
   const textCount = MAX_LENGTH - text.length
@@ -38,6 +31,7 @@ export const TweetInput: React.FC<TweetInputProps> = ({
   }
 
   const handleAddTweet = () => {
+    dispatch(fetchAddTweet(text))
     setText('')
   }
 
@@ -47,9 +41,7 @@ export const TweetInput: React.FC<TweetInputProps> = ({
         <Avatar
           className={styles.tweetAvatar}
           alt={`Avatar of user ${'Ilon Mask'}`}
-          src={
-            'https://pbs.twimg.com/profile_images/1416443682157473795/dGtFbtht_400x400.jpg'
-          }
+          src={'https://pbs.twimg.com/profile_images/1416443682157473795/dGtFbtht_400x400.jpg'}
         />
       </Grid>
       <Grid item xs={11}>
@@ -65,36 +57,19 @@ export const TweetInput: React.FC<TweetInputProps> = ({
           <Divider style={{ marginLeft: 22 }} />
           <div className={styles.tweetInputButtons}>
             <div className={styles.optionsButtons}>
-              <IconButton
-                className={styles.tweetInputIconButton}
-                aria-label="delete"
-              >
+              <IconButton className={styles.tweetInputIconButton} aria-label="delete">
                 <PermMediaOutlinedIcon className={styles.tweetInputIconIcon} />
               </IconButton>
-              <IconButton
-                className={styles.tweetInputIconButton}
-                aria-label="delete"
-              >
+              <IconButton className={styles.tweetInputIconButton} aria-label="delete">
                 <GifIcon className={styles.tweetInputIconIcon} />
               </IconButton>
-              <IconButton
-                className={styles.tweetInputIconButton}
-                aria-label="delete"
-              >
+              <IconButton className={styles.tweetInputIconButton} aria-label="delete">
                 <EqualizerIcon className={styles.tweetInputIconIcon} />
               </IconButton>
-              <IconButton
-                className={styles.tweetInputIconButton}
-                aria-label="delete"
-              >
-                <SentimentSatisfiedOutlinedIcon
-                  className={styles.tweetInputIconIcon}
-                />
+              <IconButton className={styles.tweetInputIconButton} aria-label="delete">
+                <SentimentSatisfiedOutlinedIcon className={styles.tweetInputIconIcon} />
               </IconButton>
-              <IconButton
-                className={styles.tweetInputIconButton}
-                aria-label="delete"
-              >
+              <IconButton className={styles.tweetInputIconButton} aria-label="delete">
                 <TodayOutlinedIcon className={styles.tweetInputIconIcon} />
               </IconButton>
             </div>
@@ -107,17 +82,9 @@ export const TweetInput: React.FC<TweetInputProps> = ({
                     size={20}
                     thickness={5}
                     value={textLimitPercent >= 100 ? 100 : textLimitPercent}
-                    style={
-                      textLimitPercent > 100 ? { color: 'red' } : undefined
-                    }
+                    style={textLimitPercent > 100 ? { color: 'red' } : undefined}
                   />
-                  <CircularProgress
-                    style={{ color: 'rgba(0,0,0,0.1)' }}
-                    variant="static"
-                    size={20}
-                    thickness={4}
-                    value={100}
-                  />
+                  <CircularProgress style={{ color: 'rgba(0,0,0,0.1)' }} variant="static" size={20} thickness={4} value={100} />
                 </div>
               </div>
             )}

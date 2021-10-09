@@ -1,13 +1,4 @@
-import {
-  Container,
-  Divider,
-  FormControl,
-  Grid,
-  IconButton,
-  Input,
-  InputAdornment,
-  Typography,
-} from '@material-ui/core'
+import { Container, Divider, FormControl, Grid, IconButton, Input, InputAdornment, Typography } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
 import React from 'react'
 import SearchIcon from '@material-ui/icons/Search'
@@ -17,10 +8,7 @@ import { TweetInput } from '../../components/TweetInput'
 import { useHomeStyles } from './theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchTweets } from '../../redux-store/ducks/tweets/actionCreators'
-import {
-  selectIsTweetsLoading,
-  selectTweetsItems,
-} from '../../redux-store/ducks/tweets/selectors'
+import { selectIsTweetsLoading, selectTweetsItems } from '../../redux-store/ducks/tweets/selectors'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { fetchTags } from '../../redux-store/ducks/tags/actionCreators'
 import { Tags } from '../../components/Tags'
@@ -75,16 +63,7 @@ export const Home: React.FC = (): React.ReactElement => {
                 <CircularProgress style={{ margin: '200px auto 0' }} />
               ) : (
                 tweets.map((tweet) => {
-                  return (
-                    <Tweet
-                      _id={tweet._id}
-                      key={tweet._id}
-                      styles={styles}
-                      text={tweet.text}
-                      user={tweet.user}
-                      tweetDate={tweet.date}
-                    />
-                  )
+                  return <Tweet _id={tweet._id} key={tweet.id} styles={styles} text={tweet.text} user={tweet.user} date={tweet.date} />
                 })
               )}
             </Route>

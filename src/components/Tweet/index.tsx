@@ -16,22 +16,22 @@ interface TweetProps {
     avatarURL: string
   }
   text: string
-  tweetDate: string
+  date: string
 }
 
-export const Tweet: React.FC<TweetProps> = ({ styles, text, user, tweetDate, _id }: TweetProps): React.ReactElement => {
+export const Tweet: React.FC<TweetProps> = ({ styles, text, user, date, _id }: TweetProps): React.ReactElement => {
   return (
     <Paper variant="outlined" className={styles.tweetsTweet}>
       <Link className={styles.tweetsLink} to={`/home/tweet/${_id}`}>
         <Grid container spacing={3}>
           <Grid item xs={1}>
-            <Avatar className={styles.tweetAvatar} alt={`Avatar of user ${user.fullname}`} src={user.avatarURL} />
+            <Avatar className={styles.tweetAvatar} alt={`Avatar of user ${user?.fullname}`} src={user?.avatarURL} />
           </Grid>
           <Grid item xs={11}>
             <Typography className={styles.tweetTitle}>
               <b>{user.fullname}</b>
               <span>
-                @{user.username} · {tweetDate}
+                @{user.username} · {date}
               </span>
             </Typography>
             <Typography variant={'body1'} className={styles.tweetContent}>

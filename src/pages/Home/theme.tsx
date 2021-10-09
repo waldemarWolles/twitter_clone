@@ -112,12 +112,17 @@ export const useHomeStyles = makeStyles((theme: Theme) =>
 
     tweetTitle: {
       marginLeft: 20,
+
+      '&>span': {
+        display: 'block',
+      },
     },
     tweetAvatar: {
       width: theme.spacing(7),
       height: theme.spacing(7),
     },
     tweetContent: {
+      fontSize: '24px',
       marginLeft: 20,
       marginBottom: 10,
     },
