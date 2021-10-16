@@ -122,7 +122,7 @@ export const useHomeStyles = makeStyles((theme: Theme) =>
       height: theme.spacing(7),
     },
     tweetContent: {
-      fontSize: '24px',
+      fontSize: 16,
       marginLeft: 20,
       marginBottom: 10,
     },
